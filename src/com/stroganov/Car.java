@@ -19,7 +19,7 @@ public class Car implements Runnable {
         System.out.printf("Автомобиль №%d подъехал к парковке.\n", gosNumber);
         try {
 
-             parking.getSemaphore().acquire();
+            // parking.getSemaphore().acquire();
             //Ищем свободное место и паркуемся
            parkingNumber = parking.parking(gosNumber); // паркуем авто
             if (parkingNumber==-1){
@@ -27,9 +27,6 @@ public class Car implements Runnable {
             }
             Thread.sleep(5000);       //Stay at the parking
             parking.unParking(parkingNumber);
-            //release(), напротив, освобождает ресурс
-            parking.getSemaphore().release();
-            System.out.printf("Автомобиль №%d покинул парковку.\n", gosNumber);
         } catch (InterruptedException e) {
         }
     }
