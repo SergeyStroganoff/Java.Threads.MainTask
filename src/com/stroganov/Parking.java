@@ -8,8 +8,6 @@ public class Parking {
     int places;
     static int countPlaces;
     private final boolean[] PARKING_PLACES;
-    //Устанавливаем флаг "справедливый", в таком случае метод
-    //aсquire() будет раздавать разрешения в порядке очереди
     private final Semaphore semaphore;
 
     public Parking(String name, int places) {
@@ -20,17 +18,6 @@ public class Parking {
         countPlaces = places;
     }
 
-    public int getPlaces() {
-        return places;
-    }
-
-    public boolean[] getParkingPlaces() {
-        return PARKING_PLACES;
-    }
-
-    public Semaphore getSemaphore() {
-        return semaphore;
-    }
 
     public synchronized int parking(int gosNumber) {
 
@@ -47,12 +34,11 @@ public class Parking {
             if (!PARKING_PLACES[i]) {      //Если место свободно
                 PARKING_PLACES[i] = true;  //занимаем его
                 parkingNumber = i;
-                System.out.printf("Автомобиль №%d припарковался на месте %d.\n", gosNumber, i);
                 countPlaces--;
-                System.out.println("осталось парковочных мест" + countPlaces);
+                System.out.printf("Автомобиль №%d припарковался на месте %d.\n", gosNumber, i);
+                System.out.println("осталось парковочных мест " + countPlaces);
                 return parkingNumber;
             }
-        //      notify(); // ???
         return -1;
     }
 
@@ -64,12 +50,10 @@ public class Parking {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         countPlaces++;
         System.out.println("Парковочное место #: " + parkingNumber + " освободилось");
         notify();
     }
-
 }
 
 

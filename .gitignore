@@ -1,0 +1,10 @@
+.idea
+*.class
+*.info
+*.jar
+*.txt
+*.log
+*.iml
+*.patch
+*.log1
+
